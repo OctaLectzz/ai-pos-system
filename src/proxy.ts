@@ -6,6 +6,12 @@ import { type NextRequest } from 'next/server'
 const intlMiddleware = createMiddleware(routing)
 
 export async function proxy(request: NextRequest): Promise<Response> {
+  const pathname = request.nextUrl.pathname
+
+  if (pathname.startsWith('/api')) {
+    return updateSession(request)
+  }
+
   // 1. Run next-intl middleware first to check locale routing
   const response = intlMiddleware(request)
 

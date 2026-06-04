@@ -36,7 +36,15 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
   const isAuthPage =
-    pathname.startsWith('/login') || pathname.startsWith('/register') || pathname.startsWith('/forgot-password') || pathname.startsWith('/auth')
+    pathname.startsWith('/login') ||
+    pathname.startsWith('/register') ||
+    pathname.startsWith('/forgot-password') ||
+    pathname.startsWith('/auth') ||
+    pathname.startsWith('/verify-email')
+
+  if (pathname.startsWith('/api')) {
+    return supabaseResponse
+  }
 
   if (!user && !isAuthPage) {
     // no user, redirect to clean login page

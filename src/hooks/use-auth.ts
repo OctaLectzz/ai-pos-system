@@ -46,7 +46,12 @@ export function useAuth() {
       toast.success(t('loginSuccess'))
       router.push('/dashboard')
     },
-    onError: (error) => {
+    onError: (error: Error & { code?: string }, variables) => {
+      if (error.code === 'email_not_confirmed') {
+        toast.error(t('emailNotConfirmed'))
+        router.push(`/verify-email?email=${encodeURIComponent(variables.email)}`)
+        return
+      }
       toast.error(t('loginFailed'))
       console.error('Login error:', error.message)
     }
@@ -70,9 +75,9 @@ export function useAuth() {
 
       return data
     },
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
       toast.success(t('registerSuccess'))
-      router.push('/dashboard')
+      router.push(`/verify-email?email=${encodeURIComponent(variables.email)}`)
     },
     onError: (error) => {
       toast.error(t('registerFailed'))
@@ -106,6 +111,41 @@ export function useAuth() {
     }
   }
 
+  const checkVerificationStatus = useMutation({
+    mutationFn: async () => {
+      const {
+        data: { session },
+        error
+      } = await supabase.auth.getSession()
+      if (error) throw error
+      return session
+    },
+    onSuccess: (sessionData) => {
+      if (sessionData) {
+        queryClient.invalidateQueries({ queryKey: ['session'] })
+        queryClient.invalidateQueries({ queryKey: ['user'] })
+        router.push('/dashboard')
+      }
+    }
+  })
+
+  const resendVerification = useMutation({
+    mutationFn: async (email: string) => {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email
+      })
+      if (error) throw error
+    },
+    onSuccess: () => {
+      toast.success(t('resendSuccess'))
+    },
+    onError: (error: Error) => {
+      toast.error(t('resendFailed'))
+      console.error('Resend verification error:', error.message)
+    }
+  })
+
   return {
     session,
     user,
@@ -118,6 +158,10 @@ export function useAuth() {
     isRegistering: registerMutation.isPending,
     logout: logoutMutation.mutate,
     isLoggingOut: logoutMutation.isPending,
-    loginWithGoogle
+    loginWithGoogle,
+    checkVerificationStatus: checkVerificationStatus.mutate,
+    isCheckingVerification: checkVerificationStatus.isPending,
+    resendVerification: resendVerification.mutate,
+    isResendingVerification: resendVerification.isPending
   }
 }
