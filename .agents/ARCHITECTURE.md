@@ -75,13 +75,13 @@ NexPOS follows a **modular monolith** architecture built on **Next.js App Router
 
 ### 2.2 Layer Responsibilities
 
-| Layer              | Responsibility                                 | Key Files                                               |
-| :----------------- | :--------------------------------------------- | :------------------------------------------------------ |
-| **Presentation**   | UI rendering, user interaction, form handling  | `src/app/**/page.tsx`, `src/components/**`              |
-| **Application**    | Request handling, validation, auth enforcement | `src/app/api/**`, `src/schemas/**`, `src/middleware.ts` |
-| **Service**        | Business logic, external API orchestration     | `src/services/**`                                       |
-| **Data Access**    | Database queries, ORM operations               | `src/lib/prisma.ts`, Prisma schema                      |
-| **Infrastructure** | External system connections, configuration     | `src/lib/**`, `.env`                                    |
+| Layer              | Responsibility                                 | Key Files                                          |
+| :----------------- | :--------------------------------------------- | :------------------------------------------------- |
+| **Presentation**   | UI rendering, user interaction, form handling  | `src/app/**/page.tsx`, `src/components/**`         |
+| **Application**    | Request handling, validation, auth enforcement | `src/app/api/**`, `src/schemas/**`, `src/proxy.ts` |
+| **Service**        | Business logic, external API orchestration     | `src/services/**`                                  |
+| **Data Access**    | Database queries, ORM operations               | `src/lib/prisma.ts`, Prisma schema                 |
+| **Infrastructure** | External system connections, configuration     | `src/lib/**`, `.env`                               |
 
 ---
 
@@ -302,7 +302,7 @@ ai-pos-system/
 │   │   ├── supabase/
 │   │   │   ├── client.ts          # Supabase browser client
 │   │   │   ├── server.ts          # Supabase server client
-│   │   │   └── middleware.ts      # Supabase middleware client
+│   │   │   └── proxy.ts      # Supabase middleware client
 │   │   ├── gemini.ts              # Gemini AI client initialization
 │   │   ├── utils.ts               # cn() helper for shadcn
 │   │   └── constants.ts           # App-wide constants
@@ -373,7 +373,7 @@ ai-pos-system/
 │   │   ├── role-permissions.ts    # Permission checking utility
 │   │   ├── api-response.ts        # Standardized API response builder
 │   │   └── cn.ts                  # shadcn className utility
-│   └── middleware.ts              # Next.js middleware (auth + i18n + RBAC)
+│   └── proxy.ts              # Next.js middleware (auth + i18n + RBAC)
 ├── wa-service/                    # WhatsApp Bot Service (separate process)
 │   ├── src/
 │   │   ├── index.ts               # Entry point
@@ -759,15 +759,15 @@ All API endpoints return a consistent JSON structure:
 
 ```typescript
 interface ApiResponse<T> {
-  success: boolean;
-  data: T | null;
-  message: string;
+  success: boolean
+  data: T | null
+  message: string
   meta?: {
-    page: number;
-    pageSize: number;
-    totalCount: number;
-    totalPages: number;
-  };
+    page: number
+    pageSize: number
+    totalCount: number
+    totalPages: number
+  }
 }
 ```
 

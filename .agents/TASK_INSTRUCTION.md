@@ -131,18 +131,18 @@ mkdir -p public/{images,icons,fonts}
 
 Create these foundational files:
 
-| File                             | Content                           |
-| :------------------------------- | :-------------------------------- |
-| `src/lib/prisma.ts`              | Prisma client singleton           |
-| `src/lib/supabase/client.ts`     | Supabase browser client           |
-| `src/lib/supabase/server.ts`     | Supabase server client            |
-| `src/lib/supabase/middleware.ts` | Supabase middleware client        |
-| `src/lib/utils.ts`               | `cn()` helper (from shadcn)       |
-| `src/lib/constants.ts`           | App-wide constants                |
-| `src/utils/api-response.ts`      | Standardized API response builder |
-| `src/utils/format-currency.ts`   | Currency formatter                |
-| `src/utils/format-date.ts`       | Date formatter                    |
-| `src/utils/role-permissions.ts`  | RBAC permission checker           |
+| File                            | Content                           |
+| :------------------------------ | :-------------------------------- |
+| `src/lib/prisma.ts`             | Prisma client singleton           |
+| `src/lib/supabase/client.ts`    | Supabase browser client           |
+| `src/lib/supabase/server.ts`    | Supabase server client            |
+| `src/lib/supabase/proxy.ts`     | Supabase middleware client        |
+| `src/lib/utils.ts`              | `cn()` helper (from shadcn)       |
+| `src/lib/constants.ts`          | App-wide constants                |
+| `src/utils/api-response.ts`     | Standardized API response builder |
+| `src/utils/format-currency.ts`  | Currency formatter                |
+| `src/utils/format-date.ts`      | Date formatter                    |
+| `src/utils/role-permissions.ts` | RBAC permission checker           |
 
 ### Task 1.8 — Setup Providers
 
@@ -159,7 +159,7 @@ Create provider components:
 
 1. Create `src/i18n/routing.ts` — Define locales (`id`, `en`) with `id` as default
 2. Create `src/i18n/request.ts` — Request config for loading messages
-3. Create `src/middleware.ts` — Combine auth + i18n middleware
+3. Create `src/proxy.ts` — Combine auth + i18n middleware
 4. Update `next.config.ts` — Wrap with `createNextIntlPlugin`
 5. Create initial message files in `src/messages/id/` and `src/messages/en/`
 6. Restructure `src/app/` to use `[locale]` dynamic segment
@@ -194,7 +194,7 @@ npx shadcn@latest add button input card dialog table form select dropdown-menu a
 
 ### Task 2.3 — Middleware (Auth + i18n + RBAC)
 
-Update `src/middleware.ts`:
+Update `src/proxy.ts`:
 
 1. Refresh Supabase session
 2. Handle i18n locale routing
