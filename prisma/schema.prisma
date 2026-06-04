@@ -1,7 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// prisma/schema.prisma
 
 generator client {
   provider = "prisma-client"
@@ -12,18 +9,296 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+// ─── ENUMS ────────────────────────────────────────
+
+enum UserRole {
+  SUPERADMIN
+  ADMIN
+  OPERATOR
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  PARTIAL
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH
+  TRANSFER
+  E_WALLET
+}
+
+enum OrderSource {
+  WHATSAPP
+  MANUAL
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  OUT_OF_STOCK
+}
+
+// ─── MODELS ───────────────────────────────────────
+
+model Profile {
+  id        String   @id @default(uuid())
+  userId    String   @unique // References Supabase auth.users.id
+  email     String   @unique
+  fullName  String
+  avatarUrl String?
+  phone     String?
+  role      UserRole @default(OPERATOR)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  storeMembers StoreMember[]
+
+  @@map("profiles")
+}
+
+model Store {
+  id          String  @id @default(uuid())
+  name        String
+  slug        String  @unique
+  description String?
+  logoUrl     String?
+  address     String?
+  phone       String?
+  email       String?
+  currency    String  @default("IDR")
+  taxRate     Decimal @default(0) @db.Decimal(5, 2)
+  taxEnabled  Boolean @default(false)
+  timezone    String  @default("Asia/Jakarta")
+  isActive    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  members         StoreMember[]
+  categories      Category[]
+  products        Product[]
+  orders          Order[]
+  customers       Customer[]
+  whatsappSession WhatsappSession?
+  auditLogs       AuditLog[]
+
+  @@map("stores")
+}
+
+model StoreMember {
+  id        String   @id @default(uuid())
+  storeId   String
+  profileId String
+  role      UserRole @default(OPERATOR)
+  joinedAt  DateTime @default(now())
+
+  // Relations
+  store   Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([storeId, profileId])
+  @@map("store_members")
+}
+
+model Category {
+  id          String  @id @default(uuid())
+  storeId     String
+  name        String
+  description String?
+  imageUrl    String?
+  sortOrder   Int     @default(0)
+  isActive    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  store    Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id                String        @id @default(uuid())
+  storeId           String
+  categoryId        String
+  sku               String
+  name              String
+  description       String?
+  price             Decimal       @db.Decimal(12, 2)
+  discountPrice     Decimal?      @db.Decimal(12, 2)
+  costPrice         Decimal?      @db.Decimal(12, 2)
+  stock             Int           @default(0)
+  minStockThreshold Int           @default(5)
+  unit              String        @default("pcs")
+  weight            Decimal?      @db.Decimal(8, 2)
+  status            ProductStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  store      Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  category   Category       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  images     ProductImage[]
+  orderItems OrderItem[]
+  stockLogs  StockLog[]
+
+  @@unique([storeId, sku])
+  @@map("products")
+}
+
+model ProductImage {
+  id        String   @id @default(uuid())
+  productId String
+  url       String
+  altText   String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  // Relations
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_images")
+}
+
+model StockLog {
+  id            String   @id @default(uuid())
+  productId     String
+  previousStock Int
+  newStock      Int
+  adjustment    Int // positive = add, negative = subtract
+  reason        String // e.g., "order", "manual_adjustment", "restock"
+  referenceId   String? // e.g., orderId
+  createdBy     String // profileId
+  createdAt     DateTime @default(now())
+
+  // Relations
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("stock_logs")
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  storeId   String
+  name      String
+  phone     String
+  email     String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  store  Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  @@unique([storeId, phone])
+  @@map("customers")
+}
+
+model Order {
+  id             String        @id @default(uuid())
+  storeId        String
+  customerId     String?
+  orderNumber    String // Format: NX-YYYYMMDD-XXXX
+  status         OrderStatus   @default(NEW)
+  source         OrderSource   @default(MANUAL)
+  subtotal       Decimal       @db.Decimal(12, 2)
+  taxAmount      Decimal       @default(0) @db.Decimal(12, 2)
+  discountAmount Decimal       @default(0) @db.Decimal(12, 2)
+  totalAmount    Decimal       @db.Decimal(12, 2)
+  paymentMethod  PaymentMethod?
+  paymentStatus  PaymentStatus @default(PENDING)
+  notes          String?
+  customerName   String? // Denormalized for quick display
+  customerPhone  String? // Denormalized for quick display
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  completedAt    DateTime?
+
+  // Relations
+  store    Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  customer Customer?   @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  items    OrderItem[]
+
+  @@unique([storeId, orderNumber])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String  @id @default(uuid())
+  orderId     String
+  productId   String
+  productName String // Denormalized snapshot
+  quantity    Int
+  unitPrice   Decimal @db.Decimal(12, 2)
+  subtotal    Decimal @db.Decimal(12, 2)
+
+  // Relations
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@map("order_items")
+}
+
+model WhatsappSession {
+  id           String    @id @default(uuid())
+  storeId      String    @unique
+  sessionData  Json?
+  isConnected  Boolean   @default(false)
+  phoneNumber  String?
+  lastActiveAt DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relations
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@map("whatsapp_sessions")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  storeId   String
+  userId    String // profileId
+  action    String // e.g., "product.create", "order.update"
+  entity    String // e.g., "Product", "Order"
+  entityId  String
+  oldValues Json?
+  newValues Json?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  // Relations
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@map("audit_logs")
+}
+
+model AiChatHistory {
+  id        String   @id @default(uuid())
+  storeId   String
+  userId    String // profileId
+  role      String // "user" or "assistant"
+  content   String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@map("ai_chat_history")
 }

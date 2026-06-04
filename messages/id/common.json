@@ -9,10 +9,20 @@
     "save": "Simpan",
     "delete": "Hapus",
     "edit": "Ubah",
+    "create": "Buat",
+    "back": "Kembali",
+    "search": "Cari",
     "loading": "Memuat...",
     "actions": "Aksi",
     "success": "Sukses",
-    "error": "Kesalahan"
+    "error": "Kesalahan",
+    "noResults": "Tidak ada hasil ditemukan",
+    "confirmDelete": "Apakah Anda yakin ingin menghapus ini?",
+    "yes": "Ya",
+    "no": "Tidak",
+    "all": "Semua",
+    "active": "Aktif",
+    "inactive": "Nonaktif"
   },
   "nav": {
     "dashboard": "Dasbor",

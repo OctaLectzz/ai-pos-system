@@ -9,10 +9,20 @@
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "search": "Search",
     "loading": "Loading...",
     "actions": "Actions",
     "success": "Success",
-    "error": "Error"
+    "error": "Error",
+    "noResults": "No results found",
+    "confirmDelete": "Are you sure you want to delete this?",
+    "yes": "Yes",
+    "no": "No",
+    "all": "All",
+    "active": "Active",
+    "inactive": "Inactive"
   },
   "nav": {
     "dashboard": "Dashboard",

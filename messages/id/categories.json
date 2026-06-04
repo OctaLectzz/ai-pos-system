@@ -1,0 +1,58 @@
+{
+  "title": "Kategori",
+  "description": "Kelola kategori produk Anda",
+  "addCategory": "Tambah Kategori",
+  "editCategory": "Ubah Kategori",
+  "deleteCategory": "Hapus Kategori",
+  "table": {
+    "name": "Nama",
+    "description": "Deskripsi",
+    "products": "Produk",
+    "status": "Status",
+    "sortOrder": "Urutan",
+    "actions": "Aksi",
+    "active": "Aktif",
+    "inactive": "Nonaktif"
+  },
+  "form": {
+    "name": "Nama Kategori",
+    "namePlaceholder": "Masukkan nama kategori",
+    "description": "Deskripsi",
+    "descriptionPlaceholder": "Masukkan deskripsi kategori (opsional)",
+    "sortOrder": "Urutan Tampil",
+    "sortOrderPlaceholder": "0",
+    "isActive": "Aktif",
+    "isActiveDescription": "Kategori nonaktif akan disembunyikan dari menu",
+    "save": "Simpan Kategori",
+    "saving": "Menyimpan..."
+  },
+  "dialog": {
+    "deleteTitle": "Hapus Kategori",
+    "deleteDescription": "Apakah Anda yakin ingin menghapus kategori ini? Tindakan ini tidak dapat dibatalkan.",
+    "hasProducts": "Tidak dapat menghapus kategori yang memiliki produk. Pindahkan atau hapus produk terlebih dahulu."
+  },
+  "empty": {
+    "title": "Belum ada kategori",
+    "description": "Buat kategori pertama Anda untuk mulai mengorganisir produk."
+  },
+  "search": {
+    "placeholder": "Cari kategori..."
+  },
+  "toast": {
+    "createSuccess": "Kategori berhasil dibuat",
+    "createError": "Gagal membuat kategori",
+    "updateSuccess": "Kategori berhasil diperbarui",
+    "updateError": "Gagal memperbarui kategori",
+    "deleteSuccess": "Kategori berhasil dihapus",
+    "deleteError": "Gagal menghapus kategori"
+  },
+  "validation": {
+    "name": {
+      "minLength": "Nama harus minimal 2 karakter",
+      "maxLength": "Nama harus maksimal 100 karakter"
+    },
+    "description": {
+      "maxLength": "Deskripsi harus maksimal 500 karakter"
+    }
+  }
+}

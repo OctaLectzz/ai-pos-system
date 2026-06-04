@@ -1,0 +1,58 @@
+{
+  "title": "Categories",
+  "description": "Manage your product categories",
+  "addCategory": "Add Category",
+  "editCategory": "Edit Category",
+  "deleteCategory": "Delete Category",
+  "table": {
+    "name": "Name",
+    "description": "Description",
+    "products": "Products",
+    "status": "Status",
+    "sortOrder": "Order",
+    "actions": "Actions",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "form": {
+    "name": "Category Name",
+    "namePlaceholder": "Enter category name",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter category description (optional)",
+    "sortOrder": "Sort Order",
+    "sortOrderPlaceholder": "0",
+    "isActive": "Active",
+    "isActiveDescription": "Inactive categories will be hidden from the menu",
+    "save": "Save Category",
+    "saving": "Saving..."
+  },
+  "dialog": {
+    "deleteTitle": "Delete Category",
+    "deleteDescription": "Are you sure you want to delete this category? This action cannot be undone.",
+    "hasProducts": "Cannot delete category with existing products. Please move or delete the products first."
+  },
+  "empty": {
+    "title": "No categories yet",
+    "description": "Create your first category to start organizing your products."
+  },
+  "search": {
+    "placeholder": "Search categories..."
+  },
+  "toast": {
+    "createSuccess": "Category created successfully",
+    "createError": "Failed to create category",
+    "updateSuccess": "Category updated successfully",
+    "updateError": "Failed to update category",
+    "deleteSuccess": "Category deleted successfully",
+    "deleteError": "Failed to delete category"
+  },
+  "validation": {
+    "name": {
+      "minLength": "Name must be at least 2 characters",
+      "maxLength": "Name must be at most 100 characters"
+    },
+    "description": {
+      "maxLength": "Description must be at most 500 characters"
+    }
+  }
+}

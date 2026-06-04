@@ -1,0 +1,107 @@
+{
+  "title": "Produk",
+  "description": "Kelola inventaris produk Anda",
+  "addProduct": "Tambah Produk",
+  "editProduct": "Ubah Produk",
+  "deleteProduct": "Hapus Produk",
+  "adjustStock": "Sesuaikan Stok",
+  "table": {
+    "name": "Nama",
+    "sku": "SKU",
+    "category": "Kategori",
+    "price": "Harga",
+    "stock": "Stok",
+    "status": "Status",
+    "actions": "Aksi"
+  },
+  "form": {
+    "name": "Nama Produk",
+    "namePlaceholder": "Masukkan nama produk",
+    "sku": "SKU",
+    "skuPlaceholder": "Otomatis jika kosong",
+    "category": "Kategori",
+    "categoryPlaceholder": "Pilih kategori",
+    "description": "Deskripsi",
+    "descriptionPlaceholder": "Masukkan deskripsi produk (opsional)",
+    "price": "Harga",
+    "pricePlaceholder": "0",
+    "discountPrice": "Harga Diskon",
+    "discountPricePlaceholder": "Opsional",
+    "costPrice": "Harga Pokok (HPP)",
+    "costPricePlaceholder": "Opsional",
+    "stock": "Stok",
+    "stockPlaceholder": "0",
+    "minStockThreshold": "Batas Stok Minimum",
+    "minStockThresholdPlaceholder": "5",
+    "unit": "Satuan",
+    "unitPlaceholder": "pcs",
+    "weight": "Berat (kg)",
+    "weightPlaceholder": "Opsional",
+    "status": "Status",
+    "statusActive": "Aktif",
+    "statusInactive": "Nonaktif",
+    "statusOutOfStock": "Stok Habis",
+    "save": "Simpan Produk",
+    "saving": "Menyimpan..."
+  },
+  "stock": {
+    "title": "Sesuaikan Stok",
+    "description": "Tambah atau kurangi stok untuk produk ini",
+    "currentStock": "Stok Saat Ini",
+    "adjustment": "Penyesuaian",
+    "adjustmentPlaceholder": "Masukkan angka positif atau negatif",
+    "reason": "Alasan",
+    "reasonPlaceholder": "mis., Restock, Rusak, Koreksi",
+    "save": "Sesuaikan Stok",
+    "saving": "Menyesuaikan..."
+  },
+  "dialog": {
+    "deleteTitle": "Hapus Produk",
+    "deleteDescription": "Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan."
+  },
+  "empty": {
+    "title": "Belum ada produk",
+    "description": "Buat produk pertama Anda untuk mulai membangun inventaris."
+  },
+  "search": {
+    "placeholder": "Cari produk..."
+  },
+  "filter": {
+    "allCategories": "Semua Kategori",
+    "allStatuses": "Semua Status"
+  },
+  "toast": {
+    "createSuccess": "Produk berhasil dibuat",
+    "createError": "Gagal membuat produk",
+    "updateSuccess": "Produk berhasil diperbarui",
+    "updateError": "Gagal memperbarui produk",
+    "deleteSuccess": "Produk berhasil dihapus",
+    "deleteError": "Gagal menghapus produk",
+    "stockAdjustSuccess": "Stok berhasil disesuaikan",
+    "stockAdjustError": "Gagal menyesuaikan stok"
+  },
+  "validation": {
+    "name": {
+      "minLength": "Nama harus minimal 2 karakter",
+      "maxLength": "Nama harus maksimal 200 karakter"
+    },
+    "description": {
+      "maxLength": "Deskripsi harus maksimal 1000 karakter"
+    },
+    "categoryId": {
+      "required": "Kategori wajib diisi"
+    },
+    "price": {
+      "positive": "Harga harus bilangan positif"
+    },
+    "stock": {
+      "min": "Stok tidak boleh negatif"
+    },
+    "adjustment": {
+      "nonZero": "Penyesuaian tidak boleh nol"
+    },
+    "reason": {
+      "required": "Alasan wajib diisi"
+    }
+  }
+}
