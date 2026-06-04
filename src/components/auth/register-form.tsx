@@ -42,19 +42,25 @@ export function RegisterForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="name">{t('label.name')}</FieldLabel>
+            <FieldLabel htmlFor="name" required>
+              {t('label.name')}
+            </FieldLabel>
             <Input id="name" placeholder={t('placeholder.name')} {...register('name')} disabled={isRegistering} />
             <FieldError errors={[errors.name]} />
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="email">{t('label.email')}</FieldLabel>
+            <FieldLabel htmlFor="email" required>
+              {t('label.email')}
+            </FieldLabel>
             <Input id="email" placeholder={t('placeholder.email')} {...register('email')} disabled={isRegistering} />
             <FieldError errors={[errors.email]} />
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="password">{t('label.password')}</FieldLabel>
+            <FieldLabel htmlFor="password" required>
+              {t('label.password')}
+            </FieldLabel>
             <Input id="password" type="password" placeholder={t('placeholder.password')} {...register('password')} disabled={isRegistering} />
             <FieldError errors={[errors.password]} />
           </Field>

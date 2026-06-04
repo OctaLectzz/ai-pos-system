@@ -22,7 +22,8 @@
     "no": "Tidak",
     "all": "Semua",
     "active": "Aktif",
-    "inactive": "Nonaktif"
+    "inactive": "Nonaktif",
+    "optional": "(opsional)"
   },
   "nav": {
     "dashboard": "Dasbor",

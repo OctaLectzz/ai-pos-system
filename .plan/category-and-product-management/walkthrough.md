@@ -1,6 +1,6 @@
-# Walkthrough - Resolving Type Mismatches, Zod Errors, and Refactoring to Axios
+# Walkthrough - Resolving Type Mismatches, Zod Errors, Axios Refactoring, and Label Indicators
 
-We fixed all type errors and compilation issues reported in the code without introducing any `any` types, and refactored our data fetching services to use Axios.
+We fixed type errors and compilation issues reported in the code without introducing any `any` types, refactored data fetching services to use Axios, and updated form labels with visual cues for required (`*`) and optional (`(opsional)`) inputs using locale translations.
 
 ## Changes Made
 
@@ -18,29 +18,47 @@ We fixed all type errors and compilation issues reported in the code without int
 4. **Modify** [src/app/api/products/route.ts](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/app/api/products/route.ts)
    - Changed `parsed.error.errors` to `parsed.error.issues` to match Zod 4 API schema representation.
 
-### Components (Type Fixes)
+### Components (Type Fixes & Label Indicators)
 
-1. **Modify** [src/components/categories/category-form.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/categories/category-form.tsx)
-   - Imported the `Resolver` type from `react-hook-form`.
-   - Cast the Zod resolver using `as Resolver<CreateCategoryInput>` to solve the React Hook Form input vs output type mismatch when using Zod coercion features.
+1. **Modify** [src/components/ui/field.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/ui/field.tsx)
+   - Imported `useTranslations` from `next-intl`.
+   - Updated `FieldLabel` to support a new `required?: boolean` prop with a default value of `false`.
+   - Handled rendering a red custom asterisk (`*`) when `required === true`.
+   - Handled rendering the localized `(optional)` / `(opsional)` string when `required === false`.
 
-2. **Modify** [src/components/products/product-form.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/products/product-form.tsx)
-   - Imported the `Resolver` type from `react-hook-form`.
-   - Cast the Zod resolver using `as Resolver<CreateProductInput>` to solve the React Hook Form input vs output type mismatch when using Zod coercion features.
+2. **Modify** [src/components/categories/category-form.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/categories/category-form.tsx)
+   - Imported the `Resolver` type from `react-hook-form` and cast the resolver to avoid type errors.
+   - Simplified `FieldLabel` usage: added `required` shorthand to Name, and omitted the prop from Description and Sort Order (allowing them to default to optional).
 
-3. **Modify** [src/components/products/stock-adjustment-dialog.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/products/stock-adjustment-dialog.tsx)
-   - Imported the `Resolver` type from `react-hook-form`.
-   - Cast the Zod resolver using `as Resolver<StockAdjustmentInput>` to solve the React Hook Form input vs output type mismatch when using Zod coercion features.
+3. **Modify** [src/components/products/product-form.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/products/product-form.tsx)
+   - Imported the `Resolver` type from `react-hook-form` and cast the resolver to avoid type errors.
+   - Simplified `FieldLabel` usage: added `required` shorthand to Name, Category, and Price. Omitted it from all other fields so they default to optional.
+
+4. **Modify** [src/components/products/stock-adjustment-dialog.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/products/stock-adjustment-dialog.tsx)
+   - Imported the `Resolver` type from `react-hook-form` and cast the resolver to avoid type errors.
+   - Simplified `FieldLabel` usage: added `required` shorthand to Stock Adjustment and Reason.
+
+5. **Modify** [src/components/auth/login-form.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/auth/login-form.tsx)
+   - Simplified `FieldLabel` usage: added `required` shorthand to Email and Password.
+
+6. **Modify** [src/components/auth/register-form.tsx](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/components/auth/register-form.tsx)
+   - Simplified `FieldLabel` usage: added `required` shorthand to Name, Email, and Password.
+
+### Localization
+
+1. **Modify** [messages/id/common.json](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/messages/id/common.json)
+   - Added `"optional": "(opsional)"` translation key.
+
+2. **Modify** [messages/en/common.json](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/messages/en/common.json)
+   - Added `"optional": "(optional)"` translation key.
 
 ### Services (Axios Refactoring)
 
 1. **Modify** [src/services/category.service.ts](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/services/category.service.ts)
-   - Replaced native `fetch` API calls with `axios` requests (`axios.get`, `axios.post`, `axios.put`, `axios.delete`).
-   - Simplified parameter passing and data unnesting (`response.data`).
+   - Replaced native `fetch` API calls with `axios` requests.
 
 2. **Modify** [src/services/product.service.ts](file:///c:/Experience/projects/ai-pos-system/ai-pos-system/src/services/product.service.ts)
-   - Replaced native `fetch` API calls with `axios` requests (`axios.get`, `axios.post`, `axios.put`, `axios.delete`).
-   - Simplified parameter passing and data unnesting (`response.data`).
+   - Replaced native `fetch` API calls with `axios` requests.
 
 ## Validation Results
 

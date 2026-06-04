@@ -1,7 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { FormDialog } from '@/components/shared/form-dialog'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { useAdjustStock } from '@/hooks/use-products'
@@ -60,50 +59,47 @@ export function StockAdjustmentDialog({ open, onOpenChange, product }: StockAdju
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>{t('stock.title')}</DialogTitle>
-          <DialogDescription>{t('stock.description')}</DialogDescription>
-        </DialogHeader>
+    <FormDialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title={t('stock.title')}
+      description={t('stock.description')}
+      onSubmit={handleSubmit(onSubmit)}
+      cancelLabel={tc('cancel')}
+      submitLabel={t('stock.save')}
+      submitLoadingLabel={t('stock.saving')}
+      isLoading={isLoading}
+      maxWidthClassName="sm:max-w-md"
+    >
+      {product && (
+        <div className="bg-muted/50 rounded-lg p-3">
+          <p className="text-sm font-medium">{product.name}</p>
+          <p className="text-muted-foreground text-sm">
+            {t('stock.currentStock')}:{' '}
+            <span className="font-semibold">
+              {product.stock} {product.unit}
+            </span>
+          </p>
+        </div>
+      )}
 
-        {product && (
-          <div className="bg-muted/50 rounded-lg p-3">
-            <p className="text-sm font-medium">{product.name}</p>
-            <p className="text-muted-foreground text-sm">
-              {t('stock.currentStock')}:{' '}
-              <span className="font-semibold">
-                {product.stock} {product.unit}
-              </span>
-            </p>
-          </div>
-        )}
+      <FieldGroup>
+        <Field>
+          <FieldLabel htmlFor="adjustment" required>
+            {t('stock.adjustment')}
+          </FieldLabel>
+          <Input id="adjustment" type="number" placeholder={t('stock.adjustmentPlaceholder')} {...register('adjustment')} disabled={isLoading} />
+          <FieldError errors={[errors.adjustment]} />
+        </Field>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="adjustment">{t('stock.adjustment')}</FieldLabel>
-              <Input id="adjustment" type="number" placeholder={t('stock.adjustmentPlaceholder')} {...register('adjustment')} disabled={isLoading} />
-              <FieldError errors={[errors.adjustment]} />
-            </Field>
-
-            <Field>
-              <FieldLabel htmlFor="reason">{t('stock.reason')}</FieldLabel>
-              <Input id="reason" placeholder={t('stock.reasonPlaceholder')} {...register('reason')} disabled={isLoading} />
-              <FieldError errors={[errors.reason]} />
-            </Field>
-          </FieldGroup>
-
-          <DialogFooter className="mt-6">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>
-              {tc('cancel')}
-            </Button>
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? t('stock.saving') : t('stock.save')}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+        <Field>
+          <FieldLabel htmlFor="reason" required>
+            {t('stock.reason')}
+          </FieldLabel>
+          <Input id="reason" placeholder={t('stock.reasonPlaceholder')} {...register('reason')} disabled={isLoading} />
+          <FieldError errors={[errors.reason]} />
+        </Field>
+      </FieldGroup>
+    </FormDialog>
   )
 }

@@ -1,14 +1,13 @@
 'use client'
 
+import { ActionButton } from '@/components/shared/action-button'
 import { ConfirmDialog } from '@/components/shared/confirm-dialog'
 import { DataTable } from '@/components/shared/data-table'
 import { EmptyState } from '@/components/shared/empty-state'
 import { SearchInput } from '@/components/shared/search-input'
 import { StatusBadge } from '@/components/shared/status-badge'
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useCategories, useDeleteCategory } from '@/hooks/use-categories'
-import { FolderOpen, MoreHorizontal, Pencil, Trash2 } from 'lucide-react'
+import { FolderOpen, Pencil, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 
@@ -82,26 +81,17 @@ export function CategoryList({ onEdit }: CategoryListProps): React.JSX.Element {
     {
       key: 'actions',
       header: t('table.actions'),
-      className: 'w-[60px]',
+      className: 'w-[100px]',
       render: (item) => (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">{tc('actions')}</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => onEdit(item)}>
-              <Pencil className="mr-2 h-4 w-4" />
-              {tc('edit')}
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setDeleteTarget(item)}>
-              <Trash2 className="mr-2 h-4 w-4" />
-              {tc('delete')}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-1">
+          <ActionButton tooltip={tc('edit')} icon={<Pencil className="h-4 w-4" />} onClick={() => onEdit(item)} />
+          <ActionButton
+            tooltip={tc('delete')}
+            icon={<Trash2 className="text-destructive h-4 w-4" />}
+            onClick={() => setDeleteTarget(item)}
+            className="hover:bg-destructive/10 hover:text-destructive"
+          />
+        </div>
       )
     }
   ]

@@ -97,7 +97,8 @@ export function useAdjustStock() {
         queryClient.invalidateQueries({ queryKey: [PRODUCTS_KEY] })
         toast.success(t('toast.stockAdjustSuccess'))
       } else {
-        toast.error(response.message)
+        const errorKey = response.message
+        toast.error(t.has(errorKey) ? t(errorKey) : errorKey)
       }
     },
     onError: () => {

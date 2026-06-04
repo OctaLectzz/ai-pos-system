@@ -41,13 +41,17 @@ export function LoginForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="email">{t('label.email')}</FieldLabel>
+            <FieldLabel htmlFor="email" required>
+              {t('label.email')}
+            </FieldLabel>
             <Input id="email" placeholder={t('placeholder.email')} {...register('email')} disabled={isLoggingIn} />
             <FieldError errors={[errors.email]} />
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="password">{t('label.password')}</FieldLabel>
+            <FieldLabel htmlFor="password" required>
+              {t('label.password')}
+            </FieldLabel>
             <Input id="password" type="password" placeholder={t('placeholder.password')} {...register('password')} disabled={isLoggingIn} />
             <FieldError errors={[errors.password]} />
           </Field>

@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { updateProductSchema } from '@/schemas/product.schema'
+import { stockAdjustmentSchema, updateProductSchema } from '@/schemas/product.schema'
 import { errorResponse, successResponse } from '@/utils/api-response'
 import { NextRequest } from 'next/server'
 
@@ -33,15 +33,54 @@ export async function PUT(request: NextRequest, { params }: RouteParams): Promis
   try {
     const { id } = await params
     const body = await request.json()
-    const parsed = updateProductSchema.safeParse(body)
-
-    if (!parsed.success) {
-      return errorResponse(parsed.error.issues[0]?.message || 'Validation failed', 400)
-    }
 
     const existing = await prisma.product.findUnique({ where: { id } })
     if (!existing) {
       return errorResponse('Product not found', 404)
+    }
+
+    // Check if this is a stock adjustment request
+    if (body.stockAdjustment) {
+      const parsedAdjustment = stockAdjustmentSchema.safeParse(body.stockAdjustment)
+      if (!parsedAdjustment.success) {
+        return errorResponse(parsedAdjustment.error.issues[0]?.message || 'Validation failed', 400)
+      }
+
+      const { adjustment, reason } = parsedAdjustment.data
+      const newStock = existing.stock + adjustment
+
+      if (newStock < 0) {
+        return errorResponse('validation.stock.insufficient', 400)
+      }
+
+      const product = await prisma.$transaction(async (tx) => {
+        // Create stock log
+        await tx.stockLog.create({
+          data: {
+            productId: id,
+            previousStock: existing.stock,
+            newStock,
+            adjustment,
+            reason,
+            createdBy: 'default-user' // TODO: get from auth session
+          }
+        })
+
+        // Update product stock
+        return tx.product.update({
+          where: { id },
+          data: { stock: newStock },
+          include: { category: true }
+        })
+      })
+
+      return successResponse(product, 'Stock adjusted successfully')
+    }
+
+    const parsed = updateProductSchema.safeParse(body)
+
+    if (!parsed.success) {
+      return errorResponse(parsed.error.issues[0]?.message || 'Validation failed', 400)
     }
 
     const updateData: Record<string, unknown> = {}

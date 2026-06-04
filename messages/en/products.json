@@ -95,7 +95,8 @@
       "positive": "Price must be a positive number"
     },
     "stock": {
-      "min": "Stock cannot be negative"
+      "min": "Stock cannot be negative",
+      "insufficient": "Insufficient stock to perform this adjustment"
     },
     "adjustment": {
       "nonZero": "Adjustment cannot be zero"

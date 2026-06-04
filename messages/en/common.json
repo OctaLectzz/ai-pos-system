@@ -22,7 +22,8 @@
     "no": "No",
     "all": "All",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "optional": "(optional)"
   },
   "nav": {
     "dashboard": "Dashboard",

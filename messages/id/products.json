@@ -95,7 +95,8 @@
       "positive": "Harga harus bilangan positif"
     },
     "stock": {
-      "min": "Stok tidak boleh negatif"
+      "min": "Stok tidak boleh negatif",
+      "insufficient": "Stok tidak mencukupi untuk melakukan penyesuaian ini"
     },
     "adjustment": {
       "nonZero": "Penyesuaian tidak boleh nol"
