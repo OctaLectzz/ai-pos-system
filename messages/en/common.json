@@ -1,0 +1,26 @@
+{
+  "app": {
+    "name": "NexPOS",
+    "tagline": "AI-Powered Omnichannel POS System"
+  },
+  "common": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "actions": "Actions",
+    "success": "Success",
+    "error": "Error"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "categories": "Categories",
+    "orders": "Orders",
+    "pos": "Cashier POS",
+    "reports": "Reports",
+    "settings": "Settings"
+  }
+}

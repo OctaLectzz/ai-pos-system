@@ -1,0 +1,26 @@
+{
+  "app": {
+    "name": "NexPOS",
+    "tagline": "Sistem POS Omnichannel Berbasis AI"
+  },
+  "common": {
+    "submit": "Kirim",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "delete": "Hapus",
+    "edit": "Ubah",
+    "loading": "Memuat...",
+    "actions": "Aksi",
+    "success": "Sukses",
+    "error": "Kesalahan"
+  },
+  "nav": {
+    "dashboard": "Dasbor",
+    "products": "Produk",
+    "categories": "Kategori",
+    "orders": "Pesanan",
+    "pos": "Kasir POS",
+    "reports": "Laporan",
+    "settings": "Pengaturan"
+  }
+}
