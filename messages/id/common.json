@@ -21,6 +21,8 @@
     "orders": "Pesanan",
     "pos": "Kasir POS",
     "reports": "Laporan",
+    "aiAssistant": "Asisten AI",
+    "whatsapp": "WhatsApp",
     "settings": "Pengaturan"
   }
 }

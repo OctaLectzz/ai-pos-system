@@ -1,0 +1,44 @@
+{
+  "title": "Dashboard",
+  "kpi": {
+    "totalRevenue": "Total Revenue",
+    "totalOrders": "Total Orders",
+    "totalProducts": "Total Products",
+    "lowStock": "Low Stock Items",
+    "fromLastMonth": "from last month"
+  },
+  "charts": {
+    "revenue": "Revenue Overview",
+    "topProducts": "Top Products"
+  },
+  "recentOrders": {
+    "title": "Recent Orders",
+    "viewAll": "View All",
+    "columns": {
+      "orderId": "Order ID",
+      "customer": "Customer",
+      "status": "Status",
+      "total": "Total",
+      "date": "Date"
+    }
+  },
+  "alerts": {
+    "lowStockTitle": "Low Stock Alerts",
+    "resolve": "Resolve",
+    "stock": "Stock: {count}"
+  },
+  "sidebar": {
+    "search": "Search..."
+  },
+  "header": {
+    "search": "Search...",
+    "profile": "Profile",
+    "logout": "Logout",
+    "settings": "Settings"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

@@ -2,7 +2,7 @@
 
 import { createClient } from '@/lib/supabase/client'
 import type { Session, User } from '@supabase/supabase-js'
-import * as React from 'react'
+import { createContext, type JSX, type ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 
 export interface SessionContextType {
   session: Session | null
@@ -10,16 +10,16 @@ export interface SessionContextType {
   isLoading: boolean
 }
 
-export const SessionContext = React.createContext<SessionContextType | undefined>(undefined)
+export const SessionContext = createContext<SessionContextType | undefined>(undefined)
 
-export function SessionProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
-  const [session, setSession] = React.useState<Session | null>(null)
-  const [user, setUser] = React.useState<User | null>(null)
-  const [isLoading, setIsLoading] = React.useState<boolean>(true)
+export function SessionProvider({ children }: { children: ReactNode }): JSX.Element {
+  const [session, setSession] = useState<Session | null>(null)
+  const [user, setUser] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const supabase = React.useMemo(() => createClient(), [])
+  const supabase = useMemo(() => createClient(), [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     let mounted = true
 
     async function getInitialSession(): Promise<void> {
@@ -56,7 +56,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }): Re
     }
   }, [supabase])
 
-  const value = React.useMemo(
+  const value = useMemo(
     () => ({
       session,
       user,
@@ -69,7 +69,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }): Re
 }
 
 export function useSession(): SessionContextType {
-  const context = React.useContext(SessionContext)
+  const context = useContext(SessionContext)
   if (context === undefined) {
     throw new Error('useSession must be used within a SessionProvider')
   }

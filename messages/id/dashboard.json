@@ -1,0 +1,44 @@
+{
+  "title": "Dasbor",
+  "kpi": {
+    "totalRevenue": "Total Pendapatan",
+    "totalOrders": "Total Pesanan",
+    "totalProducts": "Total Produk",
+    "lowStock": "Stok Menipis",
+    "fromLastMonth": "dari bulan lalu"
+  },
+  "charts": {
+    "revenue": "Ringkasan Pendapatan",
+    "topProducts": "Produk Teratas"
+  },
+  "recentOrders": {
+    "title": "Pesanan Terbaru",
+    "viewAll": "Lihat Semua",
+    "columns": {
+      "orderId": "ID Pesanan",
+      "customer": "Pelanggan",
+      "status": "Status",
+      "total": "Total",
+      "date": "Tanggal"
+    }
+  },
+  "alerts": {
+    "lowStockTitle": "Peringatan Stok Menipis",
+    "resolve": "Atasi",
+    "stock": "Stok: {count}"
+  },
+  "sidebar": {
+    "search": "Cari..."
+  },
+  "header": {
+    "search": "Cari...",
+    "profile": "Profil",
+    "logout": "Keluar",
+    "settings": "Pengaturan"
+  },
+  "theme": {
+    "light": "Terang",
+    "dark": "Gelap",
+    "system": "Sistem"
+  }
+}

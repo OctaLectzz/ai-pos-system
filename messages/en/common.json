@@ -21,6 +21,8 @@
     "orders": "Orders",
     "pos": "Cashier POS",
     "reports": "Reports",
+    "aiAssistant": "AI Assistant",
+    "whatsapp": "WhatsApp",
     "settings": "Settings"
   }
 }
