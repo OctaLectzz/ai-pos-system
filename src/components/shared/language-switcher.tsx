@@ -1,11 +1,12 @@
 'use client'
 
 import { usePathname, useRouter } from '@/i18n/routing'
-import { Globe } from 'lucide-react'
+import { Check, Globe } from 'lucide-react'
 import { useLocale } from 'next-intl'
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher() {
   const locale = useLocale()
@@ -25,12 +26,20 @@ export function LanguageSwitcher() {
           <span className="sr-only">Switch language</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => switchLanguage('id')} className={locale === 'id' ? 'bg-muted' : ''}>
+      <DropdownMenuContent align="end" className="w-40">
+        <DropdownMenuItem
+          onClick={() => switchLanguage('id')}
+          className={cn('flex cursor-pointer items-center justify-between', locale === 'id' && 'bg-muted font-medium')}
+        >
           Indonesia
+          {locale === 'id' && <Check className="text-primary h-4 w-4" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => switchLanguage('en')} className={locale === 'en' ? 'bg-muted' : ''}>
+        <DropdownMenuItem
+          onClick={() => switchLanguage('en')}
+          className={cn('flex cursor-pointer items-center justify-between', locale === 'en' && 'bg-muted font-medium')}
+        >
           English
+          {locale === 'en' && <Check className="text-primary h-4 w-4" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

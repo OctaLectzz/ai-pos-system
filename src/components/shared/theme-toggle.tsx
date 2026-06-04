@@ -1,14 +1,15 @@
 'use client'
 
-import { Moon, Sun } from 'lucide-react'
+import { Check, Moon, Sun } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { cn } from '@/lib/utils'
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const t = useTranslations('dashboard.theme')
 
   return (
@@ -20,10 +21,28 @@ export function ThemeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>{t('light')}</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>{t('dark')}</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>{t('system')}</DropdownMenuItem>
+      <DropdownMenuContent align="end" className="w-40">
+        <DropdownMenuItem
+          onClick={() => setTheme('light')}
+          className={cn('flex cursor-pointer items-center justify-between', theme === 'light' && 'bg-muted font-medium')}
+        >
+          {t('light')}
+          {theme === 'light' && <Check className="text-primary h-4 w-4" />}
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme('dark')}
+          className={cn('flex cursor-pointer items-center justify-between', theme === 'dark' && 'bg-muted font-medium')}
+        >
+          {t('dark')}
+          {theme === 'dark' && <Check className="text-primary h-4 w-4" />}
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme('system')}
+          className={cn('flex cursor-pointer items-center justify-between', theme === 'system' && 'bg-muted font-medium')}
+        >
+          {t('system')}
+          {theme === 'system' && <Check className="text-primary h-4 w-4" />}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

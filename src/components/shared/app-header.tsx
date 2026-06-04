@@ -1,6 +1,6 @@
 'use client'
 
-import { LogOut, Menu, Search, Settings, User } from 'lucide-react'
+import { LogOut, Search, Settings, User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -14,10 +14,10 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Separator } from '@/components/ui/separator'
+import { SidebarTrigger } from '@/components/ui/sidebar'
 
 import { useAuth } from '@/hooks/use-auth'
-import { AppSidebar } from './app-sidebar'
 import { LanguageSwitcher } from './language-switcher'
 import { ThemeToggle } from './theme-toggle'
 
@@ -36,18 +36,9 @@ export function AppHeader() {
     : 'U'
 
   return (
-    <header className="border-border bg-background sticky top-0 z-30 flex h-16 items-center gap-4 border-b px-4 shadow-sm sm:px-6">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="shrink-0 lg:hidden">
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="w-64 border-r-0 p-0">
-          <AppSidebar isMobile />
-        </SheetContent>
-      </Sheet>
+    <header className="border-border bg-background sticky top-0 z-30 flex h-16 shrink-0 items-center gap-2 border-b px-4 shadow-sm sm:px-6">
+      <SidebarTrigger className="-ml-1" />
+      <Separator orientation="vertical" className="mr-2 h-4" />
 
       <div className="flex flex-1 items-center gap-4">
         <form className="relative hidden max-w-sm flex-1 md:flex">

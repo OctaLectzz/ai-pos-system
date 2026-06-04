@@ -120,7 +120,7 @@ export function CategoryForm({ open, onOpenChange, category }: CategoryFormProps
           <FieldError errors={[errors.sortOrder]} />
         </Field>
 
-        <Field orientation="horizontal">
+        <Field>
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <FieldLabel htmlFor="isActive">{t('form.isActive')}</FieldLabel>

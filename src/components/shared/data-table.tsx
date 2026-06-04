@@ -21,12 +21,15 @@ interface DataTableProps<T> {
 export function DataTable<T>({ columns, data, isLoading = false, emptyState, className, skeletonRows = 5 }: DataTableProps<T>): React.JSX.Element {
   if (isLoading) {
     return (
-      <div className={cn('rounded-lg border', className)}>
+      <div className={cn('bg-card rounded-xl border shadow-sm', className)}>
         <Table>
-          <TableHeader>
-            <TableRow>
+          <TableHeader className="bg-muted/40">
+            <TableRow className="border-b-0 hover:bg-transparent">
               {columns.map((col) => (
-                <TableHead key={col.key} className={col.className}>
+                <TableHead
+                  key={col.key}
+                  className={cn('text-muted-foreground h-11 px-4 text-xs font-semibold tracking-wider uppercase', col.className)}
+                >
                   {col.header}
                 </TableHead>
               ))}
@@ -34,9 +37,9 @@ export function DataTable<T>({ columns, data, isLoading = false, emptyState, cla
           </TableHeader>
           <TableBody>
             {Array.from({ length: skeletonRows }).map((_, rowIdx) => (
-              <TableRow key={rowIdx}>
+              <TableRow key={rowIdx} className="border-b-muted/40">
                 {columns.map((col) => (
-                  <TableCell key={col.key}>
+                  <TableCell key={col.key} className="px-4 py-4">
                     <Skeleton className="h-5 w-full" />
                   </TableCell>
                 ))}
@@ -53,12 +56,15 @@ export function DataTable<T>({ columns, data, isLoading = false, emptyState, cla
   }
 
   return (
-    <div className={cn('rounded-lg border', className)}>
+    <div className={cn('bg-card overflow-hidden rounded-xl border shadow-sm', className)}>
       <Table>
-        <TableHeader>
-          <TableRow>
+        <TableHeader className="bg-muted/40">
+          <TableRow className="border-b-0 hover:bg-transparent">
             {columns.map((col) => (
-              <TableHead key={col.key} className={col.className}>
+              <TableHead
+                key={col.key}
+                className={cn('text-muted-foreground h-11 px-4 text-xs font-semibold tracking-wider uppercase', col.className)}
+              >
                 {col.header}
               </TableHead>
             ))}
@@ -66,9 +72,9 @@ export function DataTable<T>({ columns, data, isLoading = false, emptyState, cla
         </TableHeader>
         <TableBody>
           {data.map((item, idx) => (
-            <TableRow key={idx} className="even:bg-muted/30">
+            <TableRow key={idx} className="border-b-muted/40 hover:bg-muted/50 data-[state=selected]:bg-muted transition-colors">
               {columns.map((col) => (
-                <TableCell key={col.key} className={col.className}>
+                <TableCell key={col.key} className={cn('px-4 py-3.5', col.className)}>
                   {col.render(item)}
                 </TableCell>
               ))}
