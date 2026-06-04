@@ -33,10 +33,10 @@ export function RevenueChart() {
           {mounted ? (
             <ResponsiveContainer>
               <LineChart data={data} margin={{ top: 10, right: 30, left: 20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis
-                  stroke="hsl(var(--muted-foreground))"
+                  stroke="var(--muted-foreground)"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
@@ -44,20 +44,20 @@ export function RevenueChart() {
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    borderColor: 'hsl(var(--border))',
-                    color: 'hsl(var(--card-foreground))',
+                    backgroundColor: 'var(--card)',
+                    borderColor: 'var(--border)',
+                    color: 'var(--card-foreground)',
                     borderRadius: 'var(--radius)'
                   }}
                   formatter={(value) => [formatCurrency(Number(value)), 'Revenue']}
-                  labelStyle={{ color: 'hsl(var(--foreground))' }}
+                  labelStyle={{ color: 'var(--foreground)' }}
                 />
                 <Line
                   type="monotone"
                   dataKey="total"
-                  stroke="hsl(var(--primary))"
+                  stroke="var(--primary)"
                   strokeWidth={3}
-                  activeDot={{ r: 6, fill: 'hsl(var(--primary))' }}
+                  activeDot={{ r: 6, fill: 'var(--primary)' }}
                   dot={false}
                 />
               </LineChart>
