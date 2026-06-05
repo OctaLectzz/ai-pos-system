@@ -31,7 +31,8 @@
     "product": "Product",
     "quantity": "Qty",
     "price": "Price",
-    "total": "Total"
+    "total": "Total",
+    "printReceipt": "Print Receipt"
   },
   "status": {
     "title": "Update Status",

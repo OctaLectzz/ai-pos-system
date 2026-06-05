@@ -1,5 +1,6 @@
 'use client'
 
+import { ReceiptPreview } from '@/components/shared/receipt-preview'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Field, FieldLabel } from '@/components/ui/field'
@@ -7,12 +8,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator'
 import { useCreateOrder } from '@/hooks/use-orders'
 import { formatCurrency } from '@/utils/format-currency'
-import { CheckCircle2, Receipt } from 'lucide-react'
+import { CheckCircle2, Printer, Receipt } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
-import type { OrderItem, PaymentMethod } from '@/types/order.types'
+import type { Order, OrderItem, PaymentMethod } from '@/types/order.types'
 
 interface PosCheckoutDialogProps {
   open: boolean
@@ -39,11 +40,12 @@ export function PosCheckoutDialog({
   const to = useTranslations('orders')
   const tc = useTranslations('common')
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('CASH')
-  const [orderNumber, setOrderNumber] = useState<string | null>(null)
+  const [createdOrder, setCreatedOrder] = useState<Order | null>(null)
+  const [receiptOpen, setReceiptOpen] = useState(false)
 
   const createOrderMutation = useCreateOrder()
 
-  const handleCheckout = () => {
+  const handleCheckout = (): void => {
     if (items.length === 0) {
       toast.error(to('validation.items.required'))
       return
@@ -64,47 +66,60 @@ export function PosCheckoutDialog({
       {
         onSuccess: (response) => {
           if (response.success && response.data) {
-            setOrderNumber(response.data.orderNumber)
+            setCreatedOrder(response.data)
           }
         }
       }
     )
   }
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     onOpenChange(false)
-    if (orderNumber) {
+    if (createdOrder) {
       setTimeout(() => {
-        setOrderNumber(null)
+        setCreatedOrder(null)
         onSuccess()
       }, 300)
     }
   }
 
-  if (orderNumber) {
+  const handlePrintReceipt = (): void => {
+    setReceiptOpen(true)
+  }
+
+  // Success state — show order confirmation with print option
+  if (createdOrder) {
     return (
-      <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-md">
-          <div className="flex flex-col items-center justify-center py-6 text-center">
-            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10">
-              <CheckCircle2 className="h-8 w-8 text-emerald-600" />
-            </div>
-            <DialogTitle className="mb-2 text-xl">{t('successDialog.title')}</DialogTitle>
-            <DialogDescription className="mb-6">{t('successDialog.description')}</DialogDescription>
+      <>
+        <Dialog open={open} onOpenChange={handleClose}>
+          <DialogContent className="sm:max-w-md">
+            <div className="flex flex-col items-center justify-center py-6 text-center">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10">
+                <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+              </div>
+              <DialogTitle className="mb-2 text-xl">{t('successDialog.title')}</DialogTitle>
+              <DialogDescription className="mb-6">{t('successDialog.description')}</DialogDescription>
 
-            <div className="bg-muted w-full rounded-lg p-4">
-              <div className="text-muted-foreground mb-1 text-sm">{t('successDialog.orderNumber')}</div>
-              <div className="font-mono text-xl font-bold tracking-wider">{orderNumber}</div>
+              <div className="bg-muted w-full rounded-lg p-4">
+                <div className="text-muted-foreground mb-1 text-sm">{t('successDialog.orderNumber')}</div>
+                <div className="font-mono text-xl font-bold tracking-wider">{createdOrder.orderNumber}</div>
+              </div>
             </div>
-          </div>
 
-          <DialogFooter className="flex-col gap-2 sm:flex-col">
-            <Button onClick={handleClose} className="w-full">
-              {t('successDialog.newOrder')}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            <DialogFooter className="flex-col gap-2 sm:flex-col">
+              <Button variant="outline" onClick={handlePrintReceipt} className="w-full">
+                <Printer className="mr-2 h-4 w-4" />
+                {t('successDialog.printReceipt')}
+              </Button>
+              <Button onClick={handleClose} className="w-full">
+                {t('successDialog.newOrder')}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        <ReceiptPreview open={receiptOpen} onOpenChange={setReceiptOpen} order={createdOrder} />
+      </>
     )
   }
 

@@ -42,6 +42,7 @@
     "description": "Pesanan telah dibuat dan pembayaran dicatat.",
     "orderNumber": "Nomor Pesanan",
     "newOrder": "Mulai Pesanan Baru",
-    "viewOrder": "Lihat Detail Pesanan"
+    "viewOrder": "Lihat Detail Pesanan",
+    "printReceipt": "Cetak Struk"
   }
 }

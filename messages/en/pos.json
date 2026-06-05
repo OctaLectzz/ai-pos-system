@@ -42,6 +42,7 @@
     "description": "The order has been created and payment recorded.",
     "orderNumber": "Order Number",
     "newOrder": "Start New Order",
-    "viewOrder": "View Order Detail"
+    "viewOrder": "View Order Detail",
+    "printReceipt": "Print Receipt"
   }
 }

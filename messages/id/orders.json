@@ -31,7 +31,8 @@
     "product": "Produk",
     "quantity": "Jml",
     "price": "Harga",
-    "total": "Total"
+    "total": "Total",
+    "printReceipt": "Cetak Struk"
   },
   "status": {
     "title": "Perbarui Status",

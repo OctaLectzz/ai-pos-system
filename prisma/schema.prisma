@@ -95,6 +95,8 @@ model Store {
   customers       Customer[]
   whatsappSession WhatsappSession?
   auditLogs       AuditLog[]
+  receiptSettings ReceiptSettings?
+  printers        Printer[]
 
   @@map("stores")
 }
@@ -301,4 +303,42 @@ model AiChatHistory {
   createdAt DateTime @default(now())
 
   @@map("ai_chat_history")
+}
+
+model ReceiptSettings {
+  id           String  @id @default(uuid())
+  storeId      String  @unique
+  headerText   String?
+  footerText   String?
+  wifiName     String?
+  wifiPassword String?
+  showLogo     Boolean @default(false)
+  showTax      Boolean @default(true)
+  showAddress  Boolean @default(true)
+  showPhone    Boolean @default(true)
+  paperWidth   Int     @default(80)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@map("receipt_settings")
+}
+
+model Printer {
+  id         String  @id @default(uuid())
+  storeId    String
+  name       String
+  deviceName String
+  type       String  @default("THERMAL")
+  isDefault  Boolean @default(false)
+  isActive   Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@map("printers")
 }

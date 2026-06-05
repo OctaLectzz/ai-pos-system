@@ -34,6 +34,8 @@
     "reports": "Reports",
     "aiAssistant": "AI Assistant",
     "whatsapp": "WhatsApp",
-    "settings": "Settings"
+    "settings": "Settings",
+    "receiptSettings": "Receipt",
+    "printers": "Printers"
   }
 }

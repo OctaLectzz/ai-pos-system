@@ -67,7 +67,7 @@ export function PosProductGrid({ products, categories, onAddToCart, isLoading = 
       <div className="flex h-full flex-col space-y-4 p-5">
         <div className="bg-muted h-12 w-full max-w-sm animate-pulse rounded-xl" />
         <div className="bg-muted mt-2 h-10 w-full animate-pulse rounded-full" />
-        <div className="grid grid-cols-2 gap-5 pt-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-5 pt-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {Array.from({ length: 10 }).map((_, i) => (
             <div key={i} className="bg-muted aspect-[4/5] animate-pulse rounded-2xl" />
           ))}
@@ -122,7 +122,7 @@ export function PosProductGrid({ products, categories, onAddToCart, isLoading = 
       </div>
 
       {/* Product Grid Section */}
-      <ScrollArea className="bg-muted/10 flex-1 px-5 pt-5">
+      <ScrollArea className="bg-muted/10 min-h-0 flex-1 px-5 pt-5">
         {filteredProducts.length === 0 ? (
           <div className="text-muted-foreground flex h-[400px] flex-col items-center justify-center text-center">
             <div className="bg-muted/50 mb-4 flex h-20 w-20 items-center justify-center rounded-full">
@@ -142,14 +142,14 @@ export function PosProductGrid({ products, categories, onAddToCart, isLoading = 
                 <div
                   key={product.id}
                   className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border transition-all duration-300 ${
-                    isOutOfStock
-                      ? 'opacity-60 grayscale'
-                      : 'border-border/50 bg-card hover:border-primary/40 hover:shadow-primary/5 hover:-translate-y-1 hover:shadow-xl'
+                    isOutOfStock ? 'opacity-60 grayscale' : 'border-border/50 bg-card hover:border-primary/40 hover:shadow-primary/5 hover:shadow-xl'
                   }`}
                   onClick={() => !isOutOfStock && onAddToCart(product)}
                 >
                   {/* Product Image Area (using beautiful gradients + initials) */}
-                  <div className={`relative flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br ${getGradient(product.id)}`}>
+                  <div
+                    className={`relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-gradient-to-br ${getGradient(product.id)}`}
+                  >
                     <span className="text-5xl font-black tracking-tighter opacity-60 transition-transform duration-500 group-hover:scale-110">
                       {getInitials(product.name)}
                     </span>
@@ -175,7 +175,7 @@ export function PosProductGrid({ products, categories, onAddToCart, isLoading = 
 
                     {/* Interactive "Add to Cart" Hover Overlay */}
                     {!isOutOfStock && (
-                      <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/5 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100 dark:bg-white/5">
+                      <div className="absolute inset-0 flex items-center justify-center rounded-t-2xl bg-black/5 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100 dark:bg-white/5">
                         <div className="bg-primary text-primary-foreground flex h-14 w-14 scale-75 items-center justify-center rounded-full shadow-lg transition-transform duration-300 group-hover:scale-100">
                           <Plus className="h-7 w-7" />
                         </div>

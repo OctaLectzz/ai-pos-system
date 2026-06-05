@@ -18,6 +18,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     const products = (await import(`../../messages/${locale}/products.json`)).default
     const orders = (await import(`../../messages/${locale}/orders.json`)).default
     const pos = (await import(`../../messages/${locale}/pos.json`)).default
+    const receipt = (await import(`../../messages/${locale}/receipt.json`)).default
 
     messages = {
       ...common, // Spread common at the root so app.name and common.success work
@@ -26,7 +27,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       categories,
       products,
       orders,
-      pos
+      pos,
+      receipt
     }
   } catch (error) {
     console.error('Failed to load messages for locale:', locale, error)

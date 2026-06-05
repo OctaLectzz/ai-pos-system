@@ -1,7 +1,19 @@
 'use client'
 
 import { Link, usePathname } from '@/i18n/routing'
-import { BarChart3, Bot, FolderOpen, LayoutDashboard, MessageCircle, MonitorSpeaker, Package, Settings, ShoppingCart } from 'lucide-react'
+import {
+  BarChart3,
+  Bot,
+  FolderOpen,
+  LayoutDashboard,
+  MessageCircle,
+  MonitorSpeaker,
+  Package,
+  Printer,
+  Receipt,
+  Settings,
+  ShoppingCart
+} from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import * as React from 'react'
 
@@ -39,7 +51,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     { label: 'WhatsApp', icon: MessageCircle, href: '/whatsapp', active: pathname.startsWith('/whatsapp') }
   ]
 
-  const systemRoutes = [{ label: tNav('settings'), icon: Settings, href: '/settings', active: pathname.startsWith('/settings') }]
+  const systemRoutes = [
+    { label: tNav('receiptSettings'), icon: Receipt, href: '/settings/receipt', active: pathname.startsWith('/settings/receipt') },
+    { label: tNav('printers'), icon: Printer, href: '/settings/printers', active: pathname.startsWith('/settings/printers') },
+    { label: tNav('settings'), icon: Settings, href: '/settings', active: pathname === '/settings' }
+  ]
 
   return (
     <Sidebar variant="sidebar" collapsible="icon" {...props}>
