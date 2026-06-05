@@ -1,0 +1,47 @@
+{
+  "title": "Point of Sale",
+  "description": "Buat pesanan baru secara manual",
+  "products": "Produk",
+  "cart": "Keranjang",
+  "checkout": "Bayar",
+  "emptyCart": {
+    "title": "Keranjang kosong",
+    "description": "Tambahkan produk dari daftar untuk memulai pesanan baru."
+  },
+  "customer": {
+    "title": "Detail Pelanggan",
+    "name": "Nama",
+    "namePlaceholder": "Pelanggan langsung",
+    "phone": "Telepon",
+    "phonePlaceholder": "Opsional",
+    "notes": "Catatan",
+    "notesPlaceholder": "Tambahkan instruksi khusus..."
+  },
+  "grid": {
+    "outOfStock": "Stok Habis",
+    "search": "Cari produk...",
+    "allCategories": "Semua Kategori",
+    "promo": "Promo",
+    "lowStock": "Sisa: {stock}",
+    "uncategorized": "Tanpa Kategori"
+  },
+  "total": "Total",
+  "remove": "Hapus",
+  "checkoutDialog": {
+    "title": "Selesaikan Pesanan",
+    "description": "Tinjau detail pesanan dan pilih metode pembayaran.",
+    "paymentMethod": "Metode Pembayaran",
+    "summary": "Ringkasan Pesanan",
+    "totalItems": "Total Barang",
+    "amount": "Jumlah Tagihan",
+    "confirm": "Konfirmasi Pembayaran & Pesanan",
+    "processing": "Memproses..."
+  },
+  "successDialog": {
+    "title": "Pesanan Berhasil",
+    "description": "Pesanan telah dibuat dan pembayaran dicatat.",
+    "orderNumber": "Nomor Pesanan",
+    "newOrder": "Mulai Pesanan Baru",
+    "viewOrder": "Lihat Detail Pesanan"
+  }
+}

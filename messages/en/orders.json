@@ -1,0 +1,98 @@
+{
+  "title": "Orders",
+  "description": "Manage customer orders and transactions",
+  "orderDetail": "Order Detail",
+  "newOrder": "New Order",
+  "orderNumber": "Order Number",
+  "table": {
+    "orderNumber": "Order #",
+    "customer": "Customer",
+    "items": "Items",
+    "total": "Total",
+    "status": "Status",
+    "payment": "Payment",
+    "source": "Source",
+    "date": "Date",
+    "actions": "Actions"
+  },
+  "detail": {
+    "customerInfo": "Customer Information",
+    "orderInfo": "Order Information",
+    "items": "Order Items",
+    "summary": "Order Summary",
+    "timeline": "Timeline",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "discount": "Discount",
+    "grandTotal": "Grand Total",
+    "notes": "Notes",
+    "noNotes": "No notes provided",
+    "noCustomer": "Walk-in Customer",
+    "product": "Product",
+    "quantity": "Qty",
+    "price": "Price",
+    "total": "Total"
+  },
+  "status": {
+    "title": "Update Status",
+    "description": "Update the current status of this order",
+    "orderStatus": "Order Status",
+    "paymentStatus": "Payment Status",
+    "paymentMethod": "Payment Method",
+    "NEW": "New",
+    "CONFIRMED": "Confirmed",
+    "PROCESSING": "Processing",
+    "COMPLETED": "Completed",
+    "CANCELLED": "Cancelled",
+    "PENDING": "Pending",
+    "PAID": "Paid",
+    "PARTIAL": "Partial",
+    "REFUNDED": "Refunded",
+    "CASH": "Cash",
+    "TRANSFER": "Bank Transfer",
+    "E_WALLET": "E-Wallet",
+    "WHATSAPP": "WhatsApp",
+    "MANUAL": "Manual POS"
+  },
+  "filter": {
+    "allStatus": "All Status",
+    "allPayment": "All Payment Status",
+    "allSource": "All Sources"
+  },
+  "search": {
+    "placeholder": "Search order number or customer name..."
+  },
+  "empty": {
+    "title": "No orders found",
+    "description": "You don't have any orders yet or none match your filters."
+  },
+  "warning": {
+    "cancelOrder": "Warning: Cancelling this order will restore the inventory stock for all items."
+  },
+  "toast": {
+    "createSuccess": "Order created successfully",
+    "createError": "Failed to create order",
+    "updateSuccess": "Order updated successfully",
+    "updateError": "Failed to update order"
+  },
+  "validation": {
+    "items": {
+      "required": "At least one item is required"
+    },
+    "productId": {
+      "required": "Product ID is required"
+    },
+    "quantity": {
+      "positive": "Quantity must be greater than zero"
+    },
+    "customerName": {
+      "maxLength": "Customer name is too long"
+    },
+    "customerPhone": {
+      "maxLength": "Phone number is too long"
+    },
+    "notes": {
+      "maxLength": "Notes are too long"
+    }
+  }
+}

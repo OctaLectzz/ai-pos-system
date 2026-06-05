@@ -1,0 +1,98 @@
+{
+  "title": "Pesanan",
+  "description": "Kelola pesanan pelanggan dan transaksi",
+  "orderDetail": "Detail Pesanan",
+  "newOrder": "Pesanan Baru",
+  "orderNumber": "Nomor Pesanan",
+  "table": {
+    "orderNumber": "No. Pesanan",
+    "customer": "Pelanggan",
+    "items": "Barang",
+    "total": "Total",
+    "status": "Status",
+    "payment": "Pembayaran",
+    "source": "Sumber",
+    "date": "Tanggal",
+    "actions": "Aksi"
+  },
+  "detail": {
+    "customerInfo": "Informasi Pelanggan",
+    "orderInfo": "Informasi Pesanan",
+    "items": "Daftar Barang",
+    "summary": "Ringkasan Pesanan",
+    "timeline": "Linimasa",
+    "subtotal": "Subtotal",
+    "tax": "Pajak",
+    "discount": "Diskon",
+    "grandTotal": "Total Akhir",
+    "notes": "Catatan",
+    "noNotes": "Tidak ada catatan",
+    "noCustomer": "Pelanggan Langsung (Walk-in)",
+    "product": "Produk",
+    "quantity": "Jml",
+    "price": "Harga",
+    "total": "Total"
+  },
+  "status": {
+    "title": "Perbarui Status",
+    "description": "Perbarui status pesanan ini saat ini",
+    "orderStatus": "Status Pesanan",
+    "paymentStatus": "Status Pembayaran",
+    "paymentMethod": "Metode Pembayaran",
+    "NEW": "Baru",
+    "CONFIRMED": "Dikonfirmasi",
+    "PROCESSING": "Diproses",
+    "COMPLETED": "Selesai",
+    "CANCELLED": "Dibatalkan",
+    "PENDING": "Tertunda",
+    "PAID": "Lunas",
+    "PARTIAL": "Sebagian",
+    "REFUNDED": "Dikembalikan",
+    "CASH": "Tunai",
+    "TRANSFER": "Transfer Bank",
+    "E_WALLET": "E-Wallet",
+    "WHATSAPP": "WhatsApp",
+    "MANUAL": "POS Manual"
+  },
+  "filter": {
+    "allStatus": "Semua Status",
+    "allPayment": "Semua Pembayaran",
+    "allSource": "Semua Sumber"
+  },
+  "search": {
+    "placeholder": "Cari nomor pesanan atau nama pelanggan..."
+  },
+  "empty": {
+    "title": "Tidak ada pesanan",
+    "description": "Anda belum memiliki pesanan atau tidak ada yang sesuai dengan filter."
+  },
+  "warning": {
+    "cancelOrder": "Peringatan: Membatalkan pesanan ini akan mengembalikan stok inventaris untuk semua barang."
+  },
+  "toast": {
+    "createSuccess": "Pesanan berhasil dibuat",
+    "createError": "Gagal membuat pesanan",
+    "updateSuccess": "Pesanan berhasil diperbarui",
+    "updateError": "Gagal memperbarui pesanan"
+  },
+  "validation": {
+    "items": {
+      "required": "Minimal satu barang harus dipilih"
+    },
+    "productId": {
+      "required": "ID Produk wajib diisi"
+    },
+    "quantity": {
+      "positive": "Jumlah harus lebih dari nol"
+    },
+    "customerName": {
+      "maxLength": "Nama pelanggan terlalu panjang"
+    },
+    "customerPhone": {
+      "maxLength": "Nomor telepon terlalu panjang"
+    },
+    "notes": {
+      "maxLength": "Catatan terlalu panjang"
+    }
+  }
+}

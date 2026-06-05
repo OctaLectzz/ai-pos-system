@@ -1,0 +1,47 @@
+{
+  "title": "Point of Sale",
+  "description": "Create new orders manually",
+  "products": "Products",
+  "cart": "Cart",
+  "checkout": "Checkout",
+  "emptyCart": {
+    "title": "Cart is empty",
+    "description": "Add products from the list to start a new order."
+  },
+  "customer": {
+    "title": "Customer Details",
+    "name": "Name",
+    "namePlaceholder": "Walk-in customer",
+    "phone": "Phone",
+    "phonePlaceholder": "Optional",
+    "notes": "Notes",
+    "notesPlaceholder": "Add any special instructions..."
+  },
+  "grid": {
+    "outOfStock": "Out of Stock",
+    "search": "Search products...",
+    "allCategories": "All Categories",
+    "promo": "Promo",
+    "lowStock": "Low: {stock}",
+    "uncategorized": "Uncategorized"
+  },
+  "total": "Total",
+  "remove": "Remove",
+  "checkoutDialog": {
+    "title": "Complete Order",
+    "description": "Review order details and select payment method.",
+    "paymentMethod": "Payment Method",
+    "summary": "Order Summary",
+    "totalItems": "Total Items",
+    "amount": "Amount to Pay",
+    "confirm": "Confirm Payment & Order",
+    "processing": "Processing..."
+  },
+  "successDialog": {
+    "title": "Order Successful",
+    "description": "The order has been created and payment recorded.",
+    "orderNumber": "Order Number",
+    "newOrder": "Start New Order",
+    "viewOrder": "View Order Detail"
+  }
+}

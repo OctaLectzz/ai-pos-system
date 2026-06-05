@@ -22,15 +22,22 @@ const ORDER_STATUS_MAP: Record<string, StatusConfig> = {
   CANCELLED: { variant: 'destructive', className: 'bg-destructive/10 text-destructive border-destructive/20' }
 }
 
+const PAYMENT_STATUS_MAP: Record<string, StatusConfig> = {
+  PENDING: { variant: 'warning', className: 'bg-amber-500/10 text-amber-600 border-amber-500/20 dark:text-amber-400' },
+  PAID: { variant: 'success', className: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20 dark:text-emerald-400' },
+  PARTIAL: { variant: 'info', className: 'bg-blue-500/10 text-blue-600 border-blue-500/20 dark:text-blue-400' },
+  REFUNDED: { variant: 'muted', className: 'bg-muted text-muted-foreground border-border' }
+}
+
 interface StatusBadgeProps {
   status: string
-  type?: 'product' | 'order'
+  type?: 'product' | 'order' | 'payment'
   label?: string
   className?: string
 }
 
 export function StatusBadge({ status, type = 'product', label, className }: StatusBadgeProps): React.JSX.Element {
-  const statusMap = type === 'product' ? PRODUCT_STATUS_MAP : ORDER_STATUS_MAP
+  const statusMap = type === 'product' ? PRODUCT_STATUS_MAP : type === 'payment' ? PAYMENT_STATUS_MAP : ORDER_STATUS_MAP
   const config = statusMap[status] || { variant: 'muted' as StatusVariant, className: '' }
 
   return (

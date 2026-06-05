@@ -16,13 +16,17 @@ export default getRequestConfig(async ({ requestLocale }) => {
     const dashboard = (await import(`../../messages/${locale}/dashboard.json`)).default
     const categories = (await import(`../../messages/${locale}/categories.json`)).default
     const products = (await import(`../../messages/${locale}/products.json`)).default
+    const orders = (await import(`../../messages/${locale}/orders.json`)).default
+    const pos = (await import(`../../messages/${locale}/pos.json`)).default
 
     messages = {
       ...common, // Spread common at the root so app.name and common.success work
       auth,
       dashboard,
       categories,
-      products
+      products,
+      orders,
+      pos
     }
   } catch (error) {
     console.error('Failed to load messages for locale:', locale, error)
